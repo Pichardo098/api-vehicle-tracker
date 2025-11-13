@@ -62,26 +62,29 @@ npm run dev
 
 ## Endpoints principales
 
-🔹 Positions
-Método Ruta Descripción
-POST /positions Registrar una nueva posición (coordenada) de un vehículo.
-GET /positions/{id} Obtener las posiciones de un vehículo específico.
-🔹 Users
-Método Ruta Descripción
-POST /users/register Registrar un nuevo usuario.
-POST /users/auth Iniciar sesión (correo y contraseña).
-PUT /users/change-password Cambiar la contraseña del usuario actual.
-GET /users/{id} Obtener todos los usuarios activos.
-🔹 Vehicles
-Método Ruta Descripción
-POST /api/v1/vehicles Crear un nuevo vehículo.
-PUT /api/v1/vehicles Actualizar información de un vehículo.
-DELETE /api/v1/vehicles Inactivar un vehículo existente.
-GET /api/v1/vehicles Obtener todos los vehículos activos.
-GET /api/v1/vehicles/{id} Obtener un vehículo por ID.
+| Método | Ruta              | Descripción                                               |
+| ------ | ----------------- | --------------------------------------------------------- |
+| `POST` | `/positions`      | Registrar una nueva posición (coordenada) de un vehículo. |
+| `GET`  | `/positions/{id}` | Obtener las posiciones de un vehículo específico.         |
+
+| Método | Ruta                     | Descripción                               |
+| ------ | ------------------------ | ----------------------------------------- |
+| `POST` | `/users/register`        | Registrar un nuevo usuario.               |
+| `POST` | `/users/auth`            | Iniciar sesión (correo y contraseña).     |
+| `PUT`  | `/users/change-password` | Cambiar la contraseña del usuario actual. |
+| `GET`  | `/users/{id}`            | Obtener todos los usuarios activos.       |
+
+| Método   | Ruta                    | Descripción                            |
+| -------- | ----------------------- | -------------------------------------- |
+| `POST`   | `/api/v1/vehicles`      | Crear un nuevo vehículo.               |
+| `PUT`    | `/api/v1/vehicles`      | Actualizar información de un vehículo. |
+| `DELETE` | `/api/v1/vehicles`      | Inactivar un vehículo existente.       |
+| `GET`    | `/api/v1/vehicles`      | Obtener todos los vehículos activos.   |
+| `GET`    | `/api/v1/vehicles/{id}` | Obtener un vehículo por ID.            |
 
 ## Estructura del proyecto
 
+```
 src/
 ├── database/
 │ └── config.js
@@ -116,13 +119,16 @@ src/
 │ └── catchAsync.js
 ├── index.js
 └── server.js
+```
 
 ## Autenticación
 
 La API utiliza JSON Web Tokens (JWT).
 Al iniciar sesión (/users/auth), el servidor devuelve un token que debe enviarse en el header de las rutas protegidas:
 
+```
 Authorization: Bearer <tu_token_aquí>
+```
 
 ## Comunicación MQTT + Socket.IO
 
@@ -136,6 +142,6 @@ Cada vez que llega una posición nueva, se emite un evento por Socket.IO a los c
 
 ## Autor
 
-Jesús Antonio Pichardo Ríos
-Desarrollador Full Stack — Node.js / Vue / PostgreSQL
+Jesús Antonio Pichardo Ríos  
+Desarrollador Full Stack — Node.js / Vue / PostgreSQL  
 2025
