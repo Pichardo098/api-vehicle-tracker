@@ -20,11 +20,11 @@ app.use(express.urlencoded({ extended: true }));
 // Enable CORS
 app.use(cors());
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', '*');
-    res.header('Access-Control-Allow-Methods', '*');
-    res.header('Allow', '*');
-    next();
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', '*');
+  res.header('Access-Control-Allow-Methods', '*');
+  res.header('Allow', '*');
+  next();
 });
 
 // Create an initial router
@@ -32,10 +32,10 @@ const initialRoute = express.Router();
 
 // Root route
 initialRoute.get('/', (req, res) => {
-    res.json({
-        message: 'Welcome to vehicle tracker',
-        port: process.env.PORT
-    });
+  res.json({
+    message: 'Welcome to vehicle tracker',
+    port: process.env.PORT,
+  });
 });
 
 // Swagger doc
@@ -47,11 +47,12 @@ app.use(require('./routes'));
 
 // 404 handler
 app.use((req, res, next) => {
-    next(new AppError(`No se encontró la URL solicitada: ${req.originalUrl}`, 404));
+  next(
+    new AppError(`No se encontró la URL solicitada: ${req.originalUrl}`, 404)
+  );
 });
 
 // Global error handler
-app.use(globalErrorHandler)
-
+app.use(globalErrorHandler);
 
 module.exports = app;

@@ -5,7 +5,7 @@ const router = express.Router();
 const positionsController = require('../../controllers/position.controller');
 
 // Middlewares
-const authMiddleware = require('../../middlewares/auth.middleware')
+const authMiddleware = require('../../middlewares/auth.middleware');
 const validations = require('../../middlewares/validations.middleware');
 
 // ---------- Routes ---------- //
@@ -64,7 +64,12 @@ const validations = require('../../middlewares/validations.middleware');
  *       401:
  *         description: Token no válido o no proporcionado.
  */
-router.post('/', authMiddleware.protect, validations.createPosition, positionsController.createPosition);
+router.post(
+  '/',
+  authMiddleware.protect,
+  validations.createPosition,
+  positionsController.createPosition
+);
 
 /**
  * @swagger
@@ -118,7 +123,10 @@ router.post('/', authMiddleware.protect, validations.createPosition, positionsCo
  *       401:
  *         description: Token no válido o no proporcionado.
  */
-router.get('/:id', authMiddleware.protect, positionsController.getPositionsByVehicle);
-
+router.get(
+  '/:id',
+  authMiddleware.protect,
+  positionsController.getPositionsByVehicle
+);
 
 module.exports = router;

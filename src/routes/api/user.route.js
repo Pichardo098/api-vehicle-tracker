@@ -5,7 +5,7 @@ const router = express.Router();
 const userControllers = require('../../controllers/user.controller');
 
 // Middlewares
-const authMiddleware = require('../../middlewares/auth.middleware')
+const authMiddleware = require('../../middlewares/auth.middleware');
 const validations = require('../../middlewares/validations.middleware');
 
 // ---------- Routes ---------- //
@@ -59,7 +59,11 @@ const validations = require('../../middlewares/validations.middleware');
  *       400:
  *         description: Datos inválidos
  */
-router.post('/register', validations.createUserValidation, userControllers.createUser);
+router.post(
+  '/register',
+  validations.createUserValidation,
+  userControllers.createUser
+);
 
 /**
  * @swagger
@@ -93,7 +97,12 @@ router.post('/register', validations.createUserValidation, userControllers.creat
  *       401:
  *         description: Token inválido o no autorizado
  */
-router.put('/change-password', authMiddleware.protect, validations.changePassword, userControllers.changePassword);
+router.put(
+  '/change-password',
+  authMiddleware.protect,
+  validations.changePassword,
+  userControllers.changePassword
+);
 
 /**
  * @swagger
@@ -125,5 +134,18 @@ router.put('/change-password', authMiddleware.protect, validations.changePasswor
  */
 router.post('/auth', validations.loginUser, userControllers.loginUser);
 
+/**
+ * @swagger
+ * /users/{id}:
+ *    get:
+ *      summary: Obtener todos los usuarios activos
+ *      tags: [Usuarios]
+ *      security:
+ *        - bearerAuth: []
+ *      responses:
+ *        200:
+ *          description: Usuarios obtenidos con éxito.
+ */
+router.get('/', authMiddleware.protect, userControllers.getAllUsers);
 
 module.exports = router;

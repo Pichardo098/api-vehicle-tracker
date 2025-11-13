@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // Controllers
-const vehiclesController = require('../../controllers/vehicles.controller')
+const vehiclesController = require('../../controllers/vehicles.controller');
 
 // Middlewares
 const authMiddleware = require('../../middlewares/auth.middleware');
@@ -30,11 +30,15 @@ const validations = require('../../middlewares/validations.middleware');
  *           schema:
  *             type: object
  *             required:
+ *               - user_id
  *               - model
  *               - color
  *               - plate_number
  *               - brand
  *             properties:
+ *               user_id:
+ *                 type: integer
+ *                 example: 1
  *               model:
  *                 type: string
  *                 example: Corolla
@@ -53,7 +57,12 @@ const validations = require('../../middlewares/validations.middleware');
  *       400:
  *         description: Ya existe un veichulo registrado con el mismo número de placa.
  */
-router.post('/', authMiddleware.protect, validations.createVehicleValidation, vehiclesController.createVehicle);
+router.post(
+  '/',
+  authMiddleware.protect,
+  validations.createVehicleValidation,
+  vehiclesController.createVehicle
+);
 
 /**
  * @swagger
@@ -99,7 +108,12 @@ router.post('/', authMiddleware.protect, validations.createVehicleValidation, ve
  *       400:
  *         description: Las placas ya han sido registradas
  */
-router.put('/', authMiddleware.protect, validations.updateVehicleValidation, vehiclesController.updateVehicle);
+router.put(
+  '/',
+  authMiddleware.protect,
+  validations.updateVehicleValidation,
+  vehiclesController.updateVehicle
+);
 
 /**
  * @swagger
@@ -129,7 +143,12 @@ router.put('/', authMiddleware.protect, validations.updateVehicleValidation, veh
  *       400:
  *         description: El vehículo ya se encuentra inactivo.
  */
-router.delete('/', authMiddleware.protect, validations.inactiveVehicleValidation, vehiclesController.inactiveVehicle)
+router.delete(
+  '/',
+  authMiddleware.protect,
+  validations.inactiveVehicleValidation,
+  vehiclesController.inactiveVehicle
+);
 
 /**
  * @swagger
@@ -143,6 +162,29 @@ router.delete('/', authMiddleware.protect, validations.inactiveVehicleValidation
  *       200:
  *         description: Vehiculos obtenidos correctamente.
  */
-router.get('/', authMiddleware.protect, vehiclesController.getAllVehicles)
+router.get('/', authMiddleware.protect, vehiclesController.getAllVehicles);
 
-module.exports = router
+/**
+ * @swagger
+ * /api/v1/vehicles/{id}:
+ *   get:
+ *     summary: Obtener un vehículo por su ID
+ *     tags: [Vehículos]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID del vehículo
+ *     responses:
+ *       200:
+ *         description: Vehículo obtenido correctamente.
+ *       404:
+ *         description: El vehículo no existe.
+ */
+router.get('/:id', authMiddleware.protect, vehiclesController.getVehicleById);
+
+module.exports = router;
