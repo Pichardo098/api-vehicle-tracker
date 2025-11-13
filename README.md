@@ -36,6 +36,7 @@ npm install
 
 Crea un archivo .env en la raíz del proyecto con el siguiente contenido (ajusta los valores según tus entorno):
 
+```
 PORT=3000
 DB_DIALECT=postgres
 DB_HOST=localhost
@@ -45,6 +46,7 @@ DB_PASSWORD=1234
 BD_DATABASE=vehicle_db
 JWT_SECRET=tu_clave_secreta
 MQTT_BROKER_URL=mqtt://test.mosquitto.org
+```
 
 ### 4 Ejecutar migraciones
 
