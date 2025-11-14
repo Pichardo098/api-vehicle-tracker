@@ -18,6 +18,10 @@ exports.createUser = catchAsync(async (req, res, next) => {
     admin,
   } = req.body;
 
+  if (password.includes(' ')) {
+    return next(new AppError('La contraseña no debe contener espacios.', 400));
+  }
+
   const emailExists = await Users.findOne({
     where: { email, active: true },
   });

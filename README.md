@@ -6,7 +6,7 @@ API desarrollada con **Node.js**, **Express**, **Sequelize** y **PostgreSQL**, q
 
 ## Tecnologías utilizadas
 
-- Node.js
+- Node.js (v24.11.1)
 - Express
 - PostgreSQL
 - Sequelize ORM
@@ -48,13 +48,29 @@ JWT_SECRET=tu_clave_secreta
 MQTT_BROKER_URL=mqtt://test.mosquitto.org
 ```
 
-### 4 Ejecutar migraciones
+### 4 Migraciones y Seeders
 
-Esto creará las tablas users, vehicles y positions en tu base de datos.
+- Este comando creará la base de datos.
 
 ```bash
-npx sequelize-cli db:migrate
+npm run db:create
 ```
+
+- Esto creará las tablas users, vehicles y positions en tu base de datos.
+
+```bash
+npm run db:migrate
+```
+
+- Crear datos de prueba.
+
+```bash
+npm run db:seed
+```
+
+#### Usuario de Prueba Creado
+
+- ADMIN: ADMIN@EXAMPLE.COM / Password123.
 
 ### 5 Iniciar el servidor
 
