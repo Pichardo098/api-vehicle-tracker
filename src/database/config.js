@@ -15,10 +15,10 @@ const dbConfig = {
 // Instancia para usar en tu app
 const db = new Sequelize(dbConfig);
 
-module.exports = { db, dbConfig };
-
-// Export default style for sequelize-cli
+// Exportación combinada
 module.exports = {
+  db,
+  dbConfig,
   development: dbConfig,
   test: dbConfig,
   production: dbConfig,

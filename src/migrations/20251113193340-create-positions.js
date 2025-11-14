@@ -13,6 +13,11 @@ module.exports = {
       },
       latitude: { type: Sequelize.DOUBLE, allowNull: false },
       longitude: { type: Sequelize.DOUBLE, allowNull: false },
+      timestamp: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.NOW,
+      },
       createdAt: { type: Sequelize.DATE, allowNull: false },
       updatedAt: { type: Sequelize.DATE, allowNull: false },
     });

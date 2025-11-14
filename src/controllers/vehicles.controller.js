@@ -72,7 +72,6 @@ exports.updateVehicle = catchAsync(async (req, res, next) => {
 
 // Controller to inactivate
 exports.inactiveVehicle = catchAsync(async (req, res, next) => {
-  const { id: user_id } = req.sessionUser;
   const { id } = req.body;
 
   // Find vehicle
@@ -84,13 +83,6 @@ exports.inactiveVehicle = catchAsync(async (req, res, next) => {
 
   if (!vehicle.active) {
     return next(new AppError('El vehículo ya se encuentra inactivo.', 400));
-  }
-
-  // Ensure the vehicle belongs to the current session user allowing deativation
-  if (vehicle.user_id !== user_id) {
-    return next(
-      new AppError('No tienes permisos para inactivar este vehículo.', 403)
-    );
   }
 
   await vehicle.update({ active: false });
